@@ -34,6 +34,9 @@ const DATASET2_FIELDS = [
 ];
 
 export default function CheckProfile() {
+  /* =========================
+     STATE
+  ========================= */
   const [dataset, setDataset] = useState("dataset1");
   const [algorithm, setAlgorithm] = useState("XGBoost");
   const [manualInput, setManualInput] = useState({});
@@ -156,7 +159,6 @@ export default function CheckProfile() {
         Fake Profile Detection & Algorithm Comparison
       </h2>
 
-      {/* CONTROLS */}
       <div className="grid md:grid-cols-2 gap-4 mb-6">
         <select
           className="border p-2 rounded"
@@ -176,7 +178,6 @@ export default function CheckProfile() {
         </select>
       </div>
 
-      {/* INPUT FORM */}
       <div className="bg-white p-6 rounded shadow grid md:grid-cols-2 gap-4">
         {activeFields.map((field, i) => (
           <div key={i}>
@@ -229,66 +230,23 @@ export default function CheckProfile() {
         </div>
       </div>
 
-      {/* LOADING */}
       {loading && (
-        <div className="mt-6">
-          <div className="w-full bg-gray-200 rounded h-3">
-            <div className="bg-blue-600 h-3 animate-pulse w-3/4"></div>
-          </div>
-          <p className="text-sm text-blue-600 mt-2 text-center">
-            Analyzing profile...
-          </p>
-        </div>
+        <p className="mt-4 text-blue-600 font-semibold text-center">
+          Processing, please wait...
+        </p>
       )}
 
-      {/* RESULT */}
-      {result && result.error && (
+      {result?.error && (
         <div className="mt-6 p-4 bg-red-100 text-red-800 rounded">
           ⚠️ {result.error}
-          <button
-            onClick={handleManualCheck}
-            className="ml-4 bg-red-600 text-white px-3 py-1 rounded"
-          >
-            Retry
-          </button>
         </div>
       )}
 
       {result && !result.error && (
-        <div
-          className={`mt-6 p-6 rounded shadow ${
-            result.prediction === "Fake Account"
-              ? "bg-red-100"
-              : "bg-green-100"
-          }`}
-        >
-          <h3 className="text-xl font-bold mb-2">Result</h3>
+        <div className="mt-6 p-6 rounded shadow bg-green-100">
           <p><b>Status:</b> {result.prediction}</p>
           <p><b>Algorithm:</b> {result.algorithm}</p>
           <p><b>Accuracy:</b> {result.accuracy}%</p>
-        </div>
-      )}
-
-      {/* COMPARISON */}
-      {comparison?.results && (
-        <div className="mt-8 bg-white p-6 rounded shadow">
-          <h3 className="text-xl font-bold mb-4">Algorithm Comparison</h3>
-          <table className="w-full border">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border p-2">Algorithm</th>
-                <th className="border p-2">Accuracy (%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(comparison.results).map(([algo, acc]) => (
-                <tr key={algo}>
-                  <td className="border p-2">{algo}</td>
-                  <td className="border p-2">{acc}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       )}
     </div>
