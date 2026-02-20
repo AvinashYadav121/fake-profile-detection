@@ -9,10 +9,13 @@ import AlgorithmComparison from "./pages/AlgorithmComparison";
 import CheckProfile from "./pages/CheckProfile";
 import Quiz from "./pages/Quiz";
 import Report from "./pages/Report";
+import AIChecker from "./pages/AIChecker";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminExport from "./pages/AdminExport";
+
+
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
@@ -55,6 +58,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <CheckProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ai-check"
+            element={
+              <ProtectedRoute>
+                <AIChecker />
               </ProtectedRoute>
             }
           />

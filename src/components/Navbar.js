@@ -63,6 +63,10 @@ export default function Navbar() {
         <Link to="/awareness">Awareness</Link>
         <Link to="/dataset">Dataset</Link>
         <Link to="/compare">Comparison</Link>
+        <li>
+  <Link to="/ai-check">AI Checker</Link>
+</li>
+
         <Link to="/check">Check</Link>
         <Link to="/quiz">Quiz</Link>
         <Link to="/report">Report</Link>
