@@ -19,91 +19,102 @@ import AdminExport from "./pages/AdminExport";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
-
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        {/* ALWAYS VISIBLE */}
-        <Navbar />
 
-        <Routes>
-          {/* PUBLIC ROUTES */}
-          <Route path="/" element={<Home />} />
-          <Route path="/awareness" element={<Awareness />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        {/* PAGE LAYOUT */}
+        <div className="min-h-screen flex flex-col">
 
-          {/* PROTECTED ROUTES */}
-          <Route
-            path="/dataset"
-            element={
-              <ProtectedRoute>
-                <DatasetModels />
-              </ProtectedRoute>
-            }
-          />
+          {/* ALWAYS VISIBLE */}
+          <Navbar />
 
-          <Route
-            path="/compare"
-            element={
-              <ProtectedRoute>
-                <AlgorithmComparison />
-              </ProtectedRoute>
-            }
-          />
+          {/* MAIN CONTENT */}
+          <main className="flex-1">
+            <Routes>
 
-          <Route
-            path="/check"
-            element={
-              <ProtectedRoute>
-                <CheckProfile />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/ai-check"
-            element={
-              <ProtectedRoute>
-                <AIChecker />
-              </ProtectedRoute>
-            }
-          />
+              {/* PUBLIC ROUTES */}
+              <Route path="/" element={<Home />} />
+              <Route path="/awareness" element={<Awareness />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
 
-          <Route
-            path="/quiz"
-            element={
-              <ProtectedRoute>
-                <Quiz />
-              </ProtectedRoute>
-            }
-          />
+              {/* PROTECTED ROUTES */}
+              <Route
+                path="/dataset"
+                element={
+                  <ProtectedRoute>
+                    <DatasetModels />
+                  </ProtectedRoute>
+                }
+              />
 
-          <Route
-            path="/report"
-            element={
-              <ProtectedRoute>
-                <Report />
-              </ProtectedRoute>
-            }
-          />
+              <Route
+                path="/compare"
+                element={
+                  <ProtectedRoute>
+                    <AlgorithmComparison />
+                  </ProtectedRoute>
+                }
+              />
 
-          {/* ADMIN ROUTE (FIXED) */}
-          <Route
-            path="/admin/export"
-            element={
-              <ProtectedRoute>
-                <AdminExport />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
+              <Route
+                path="/check"
+                element={
+                  <ProtectedRoute>
+                    <CheckProfile />
+                  </ProtectedRoute>
+                }
+              />
 
-        {/* ALWAYS VISIBLE */}
-        <Footer />
+              <Route
+                path="/ai-check"
+                element={
+                  <ProtectedRoute>
+                    <AIChecker />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/quiz"
+                element={
+                  <ProtectedRoute>
+                    <Quiz />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="/report"
+                element={
+                  <ProtectedRoute>
+                    <Report />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* ADMIN ROUTE */}
+              <Route
+                path="/admin/export"
+                element={
+                  <ProtectedRoute>
+                    <AdminExport />
+                  </ProtectedRoute>
+                }
+              />
+
+            </Routes>
+          </main>
+
+          {/* ALWAYS VISIBLE */}
+          <Footer />
+
+        </div>
+
       </BrowserRouter>
     </AuthProvider>
   );
 }
-
 export default App;

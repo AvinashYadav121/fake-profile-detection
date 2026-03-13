@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 const scamNews = [
   {
     headline: "Fake Instagram Profiles Used to Dupe Users of Lakhs",
-    image:
-      "images/news1.png",
+    image: "images/news1.png",
     content:
       "Cybercrime officials warned about fake Instagram accounts impersonating celebrities and influencers. Victims were contacted via direct messages and convinced to transfer money through UPI and digital wallets.",
     source: "Times of India",
@@ -14,9 +13,8 @@ const scamNews = [
   },
   {
     headline: "WhatsApp KYC Message Scam Leaves Thousands Locked Out of Accounts",
-    image:
-"images/news2.png", 
-   content:
+    image: "images/news2.png",
+    content:
       "Fraudsters circulated fake WhatsApp KYC verification messages. Users who clicked malicious links unknowingly shared OTPs, allowing scammers to hijack accounts and message contacts for money.",
     source: "India Today",
     platform: "WhatsApp",
@@ -25,8 +23,8 @@ const scamNews = [
   },
   {
     headline: "Romance Scams on Facebook and Instagram Drain Victims’ Savings",
-    image:
-"images/news22.png",    content:
+    image: "images/news22.png",
+    content:
       "Scammers posed as professionals on social media platforms and dating apps. After gaining trust, they fabricated emergencies and convinced victims to send large sums of money.",
     source: "The Indian Express",
     platform: "Facebook / Instagram",
@@ -35,8 +33,7 @@ const scamNews = [
   },
   {
     headline: "Telegram Investment Groups Expose Users to Crypto Frauds",
-    image:
-      "images/news4.png",
+    image: "images/news4.png",
     content:
       "Fake trading groups on Telegram promised guaranteed crypto profits. Users were shown fake dashboards and profit screenshots before the groups vanished with their investments.",
     source: "Economic Times",
@@ -52,9 +49,11 @@ export default function ScamNewsSection() {
 
   useEffect(() => {
     if (paused) return;
+
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % scamNews.length);
     }, 5000);
+
     return () => clearInterval(interval);
   }, [paused]);
 
@@ -68,37 +67,41 @@ export default function ScamNewsSection() {
 
   return (
     <section
-      className="bg-gray-100 py-10"
+      className="bg-gray-100 py-8 px-4"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow-xl">
-        <h2 className="text-3xl font-bold mb-6 text-gray-900">
+      <div className="max-w-6xl mx-auto bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-xl">
+
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 text-gray-900 text-center md:text-left">
           Social Media Scam News & Headlines
         </h2>
 
+        {/* IMAGE */}
         <img
           src={news.image}
           alt={news.headline}
           onError={(e) => (e.target.src = "/images/news/fallback.jpg")}
-          className="w-full h-[420px] object-cover rounded-lg"
+          className="w-full h-56 sm:h-72 md:h-[420px] object-cover rounded-lg"
         />
 
         <div className="mt-6">
-          <span className="inline-block text-sm bg-red-600 text-white px-4 py-1 rounded-full">
+
+          <span className="inline-block text-xs sm:text-sm bg-red-600 text-white px-3 py-1 rounded-full">
             {news.platform}
           </span>
 
-          <h3 className="text-2xl font-semibold mt-4 text-gray-900">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mt-4 text-gray-900">
             {news.headline}
           </h3>
 
-          <p className="text-lg text-gray-700 mt-3 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-gray-700 mt-3 leading-relaxed">
             {news.content}
           </p>
 
-          <div className="flex items-center justify-between mt-4">
-            <p className="text-sm text-gray-500">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 gap-2">
+
+            <p className="text-xs sm:text-sm text-gray-500">
               Source: {news.source}
             </p>
 
@@ -110,23 +113,29 @@ export default function ScamNewsSection() {
             >
               Read Full News →
             </a>
+
           </div>
         </div>
 
-        <div className="flex justify-between mt-8">
+        {/* BUTTONS */}
+        <div className="flex flex-col sm:flex-row justify-between gap-3 mt-8">
+
           <button
             onClick={prev}
-            className="px-6 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
+            className="w-full sm:w-auto px-6 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
           >
             ◀ Previous
           </button>
+
           <button
             onClick={next}
-            className="px-6 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
+            className="w-full sm:w-auto px-6 py-2 bg-blue-800 text-white rounded hover:bg-blue-900"
           >
             Next ▶
           </button>
+
         </div>
+
       </div>
     </section>
   );
